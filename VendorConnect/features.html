@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-translate="features_title">Features</title>
+    <link rel="stylesheet" href="featuresstyle.css" />
+    <style>
+        /* Basic styling for the language switcher */
+        .language-switcher-container {
+            text-align: right;
+            padding: 1rem;
+            background-color: #f8f8f8;
+            border-bottom: 1px solid #eee;
+        }
+        .language-switcher {
+            padding: 8px 15px;
+            border-radius: 5px;
+            border: 1px solid #ff6b35;
+            background-color: #fff;
+            color: #ff6b35;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="language-switcher-container">
+        <select id="languageSwitcher" class="language-switcher" onchange="setLanguage(this.value)">
+            <option value="en">English</option>
+            <option value="hi">हिन्दी</option>
+        </select>
+    </div>
+
+    <section id="features" class="features-section">
+        <div class="container">
+            <h2 class="section-title scroll-reveal" data-translate="why_choose_vc">Why Choose VendorConnect?</h2>
+            <div class="features-grid">
+                <div class="feature-card scroll-reveal">
+                    <span class="feature-icon">🌮</span>
+                    <h3 class="feature-title" data-translate="find_vendors_title">Find Nearby Vendors</h3>
+                    <p class="feature-description" data-translate="find_vendors_desc">
+                        Discover authentic street food vendors in your area. From famous corners to hidden gems, 
+                        find the best local flavors near you.
+                    </p>
+                </div>
+                <div class="feature-card scroll-reveal">
+                    <span class="feature-icon">🤝</span>
+                    <h3 class="feature-title" data-translate="connect_collaborate_title">Connect & Collaborate</h3>
+                    <p class="feature-description" data-translate="connect_collaborate_desc">
+                        Build networks with other vendors, share suppliers, and create community partnerships 
+                        that help everyone grow together.
+                    </p>
+                </div>
+                <div class="feature-card scroll-reveal">
+                    <span class="feature-icon">📈</span>
+                    <h3 class="feature-title" data-translate="business_growth_title">Business Growth</h3>
+                    <p class="feature-description" data-translate="business_growth_desc">
+                        Access tools for inventory management, customer feedback, and business insights 
+                        to take your street food business to the next level.
+                    </p>
+                </div>
+                <div class="feature-card scroll-reveal">
+                    <span class="feature-icon">📦</span>
+                    <h3 class="feature-title" data-translate="supply_chain_title">Supply Chain Support</h3>
+                    <p class="feature-description" data-translate="supply_chain_desc">
+                        Connect with trusted suppliers for ingredients, equipment, and packaging. 
+                        Get better prices through group buying and bulk orders.
+                    </p>
+                </div>
+                <div class="feature-card scroll-reveal">
+                    <span class="feature-icon">⭐</span>
+                    <h3 class="feature-title" data-translate="reviews_ratings_title">Reviews & Ratings</h3>
+                    <p class="feature-description" data-translate="reviews_ratings_desc">
+                        Build your reputation with customer reviews. Showcase your specialties and 
+                        let your food quality speak for itself.
+                    </p>
+                </div>
+                <div class="feature-card scroll-reveal">
+                    <span class="feature-icon">💬</span>
+                    <h3 class="feature-title" data-translate="easy_communication_title">Easy Communication</h3>
+                    <p class="feature-description" data-translate="easy_communication_desc">
+                        WhatsApp integration, instant messaging, and location sharing make it easy 
+                        to connect with customers and fellow vendors.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Language translations object
+        const translations = {
+            en: {
+                features_title: 'Features',
+                why_choose_vc: 'Why Choose VendorConnect?',
+                find_vendors_title: 'Find Nearby Vendors',
+                find_vendors_desc: 'Discover authentic street food vendors in your area. From famous corners to hidden gems, find the best local flavors near you.',
+                connect_collaborate_title: 'Connect & Collaborate',
+                connect_collaborate_desc: 'Build networks with other vendors, share suppliers, and create community partnerships that help everyone grow together.',
+                business_growth_title: 'Business Growth',
+                business_growth_desc: 'Access tools for inventory management, customer feedback, and business insights to take your street food business to the next level.',
+                supply_chain_title: 'Supply Chain Support',
+                supply_chain_desc: 'Connect with trusted suppliers for ingredients, equipment, and packaging. Get better prices through group buying and bulk orders.',
+                reviews_ratings_title: 'Reviews & Ratings',
+                reviews_ratings_desc: 'Build your reputation with customer reviews. Showcase your specialties and let your food quality speak for itself.',
+                easy_communication_title: 'Easy Communication',
+                easy_communication_desc: 'WhatsApp integration, instant messaging, and location sharing make it easy to connect with customers and fellow vendors.'
+            },
+            hi: {
+                features_title: 'विशेषताएँ',
+                why_choose_vc: 'वेंडरकनेक्ट क्यों चुनें?',
+                find_vendors_title: 'आस-पास के विक्रेता खोजें',
+                find_vendors_desc: 'अपने क्षेत्र में प्रामाणिक स्ट्रीट फ़ूड विक्रेताओं की खोज करें। प्रसिद्ध कोनों से लेकर छिपे हुए रत्नों तक, अपने आस-पास के बेहतरीन स्थानीय स्वाद खोजें।',
+                connect_collaborate_title: 'जुड़ें और सहयोग करें',
+                connect_collaborate_desc: 'अन्य विक्रेताओं के साथ नेटवर्क बनाएं, आपूर्तिकर्ताओं को साझा करें, और सामुदायिक साझेदारी बनाएं जो सभी को एक साथ बढ़ने में मदद करती हैं।',
+                business_growth_title: 'व्यवसाय वृद्धि',
+                business_growth_desc: 'अपने स्ट्रीट फ़ूड व्यवसाय को अगले स्तर पर ले जाने के लिए इन्वेंट्री प्रबंधन, ग्राहक प्रतिक्रिया और व्यावसायिक अंतर्दृष्टि के लिए टूल एक्सेस करें।',
+                supply_chain_title: 'आपूर्ति श्रृंखला सहायता',
+                supply_chain_desc: 'सामग्री, उपकरण और पैकेजिंग के लिए विश्वसनीय आपूर्तिकर्ताओं से जुड़ें। समूह खरीद और थोक ऑर्डर के माध्यम से बेहतर कीमतें प्राप्त करें।',
+                reviews_ratings_title: 'समीक्षाएं और रेटिंग',
+                reviews_ratings_desc: 'ग्राहक समीक्षाओं के साथ अपनी प्रतिष्ठा बनाएं। अपनी विशिष्टताओं का प्रदर्शन करें और अपनी खाद्य गुणवत्ता को खुद बोलने दें।',
+                easy_communication_title: 'आसान संचार',
+                easy_communication_desc: 'व्हाट्सएप इंटीग्रेशन, इंस्टेंट मैसेजिंग और लोकेशन शेयरिंग ग्राहकों और साथी विक्रेताओं से जुड़ना आसान बनाते हैं।'
+            }
+        };
+
+        let currentLanguage = 'en'; // Default language
+
+        // Function to set the language and apply translations
+        function setLanguage(lang) {
+            currentLanguage = lang;
+            applyTranslations();
+        }
+
+        // Function to apply translations to elements with data-translate attribute
+        function applyTranslations() {
+            document.querySelectorAll('[data-translate]').forEach(element => {
+                const key = element.getAttribute('data-translate');
+                if (translations[currentLanguage] && translations[currentLanguage][key]) {
+                    if (element.tagName === 'INPUT' || element.tagName === 'TEXTAREA') {
+                        element.placeholder = translations[currentLanguage][key];
+                    } else {
+                        element.innerHTML = translations[currentLanguage][key];
+                    }
+                }
+            });
+            // Update document title separately as it's not inside the body content directly accessible by data-translate
+            document.title = translations[currentLanguage]['features_title'];
+        }
+
+        // Scroll reveal animation (assuming you have 'scroll-reveal' class in featuresstyle.css)
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('revealed');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.scroll-reveal').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Initialize translations when the DOM is fully loaded
+        document.addEventListener('DOMContentLoaded', applyTranslations);
+    </script>
+</body>
+</html>

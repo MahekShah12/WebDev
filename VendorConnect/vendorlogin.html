@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title data-translate="page_title">Vendor Login | VendorConnect</title>
+  <link rel="stylesheet" href="mainstyles.css" />
+  <style>
+    body {
+      background: linear-gradient(135deg, #fff0e6, #f0e6ff);
+      font-family: 'Inter', sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      margin: 0; /* Ensure no default body margin */
+      position: relative; /* For absolute positioning of language switcher */
+    }
+    
+    .auth-container {
+      background: #ffffff;
+      border-radius: 25px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+      padding: 40px 30px;
+      max-width: 450px;
+      width: 100%;
+      box-sizing: border-box; /* Include padding in width */
+    }
+
+    .auth-header {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    .auth-header h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 2rem;
+      background: linear-gradient(90deg, #ff5e57, #ff9f43);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .toggle-buttons {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 25px;
+    }
+
+    .toggle-buttons button {
+      padding: 10px 20px;
+      border: none;
+      border-radius: 20px;
+      font-weight: 600;
+      margin: 0 5px;
+      cursor: pointer;
+      background: #f0f0f0;
+      transition: 0.3s;
+    }
+
+    .toggle-buttons button.active {
+      background: linear-gradient(to right, #ff5e57, #ff9f43);
+      color: white;
+    }
+
+    .auth-form {
+      display: none;
+      flex-direction: column;
+    }
+
+    .auth-form.active {
+      display: flex;
+    }
+
+    .auth-form input {
+      margin-bottom: 15px;
+      padding: 12px;
+      border-radius: 10px;
+      border: 1px solid #ddd;
+      font-size: 1rem;
+    }
+
+    .auth-form button {
+      background: linear-gradient(to right, #38ef7d, #11998e);
+      color: white;
+      padding: 12px;
+      border: none;
+      border-radius: 30px;
+      font-weight: 600;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+
+    .auth-form button:hover {
+      filter: brightness(1.1);
+    }
+    /* Styling for the language switcher */
+    .language-switcher-container {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+    }
+    .language-switcher {
+        padding: 8px 15px;
+        border-radius: 5px;
+        border: 1px solid #ff6b35;
+        background-color: #fff;
+        color: #ff6b35;
+        cursor: pointer;
+        font-size: 1rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="language-switcher-container">
+    <select id="languageSwitcher" class="language-switcher" onchange="setLanguage(this.value)">
+        <option value="en">English</option>
+        <option value="hi">हिन्दी</option>
+    </select>
+  </div>
+
+  <div class="auth-container">
+    <div class="auth-header">
+      <h2>VendorConnect</h2>
+      <p data-translate="header_subtitle">Login or Register as a Street Food Vendor</p>
+    </div>
+
+    <div class="toggle-buttons">
+      <button id="show-login" class="active" data-translate="sign_in_btn">Sign In</button>
+      <button id="show-register" data-translate="sign_up_btn">Sign Up</button>
+    </div>
+
+    <form id="login-form" class="auth-form active" onsubmit="event.preventDefault(); window.location.href='vendorhome.html';">
+      <input type="text" placeholder="Username" required data-translate="username_placeholder"/>
+      <input type="password" placeholder="Password" required data-translate="password_placeholder"/>
+      <button type="submit" data-translate="sign_in_btn_form">Sign In</button>
+    </form>
+
+    <form id="register-form" class="auth-form" onsubmit="event.preventDefault(); window.location.href='vendorhome.html';">
+      <input type="text" placeholder="Full Name" required data-translate="full_name_placeholder"/>
+      <input type="tel" placeholder="Phone Number" required data-translate="phone_number_placeholder"/>
+      <input type="text" placeholder="Vendor Type (e.g., Dosa, Chaat...)" required data-translate="vendor_type_placeholder"/>
+      <input type="text" placeholder="Location / Place" required data-translate="location_placeholder"/>
+      <input type="text" placeholder="Username" required data-translate="username_placeholder"/>
+      <input type="password" placeholder="Password" required data-translate="password_placeholder"/>
+      <button type="submit" data-translate="register_btn">Register</button>
+    </form>
+  </div>
+
+  <script>
+    const showLoginBtn = document.getElementById('show-login');
+    const showRegisterBtn = document.getElementById('show-register');
+    const loginForm = document.getElementById('login-form');
+    const registerForm = document.getElementById('register-form');
+
+    showLoginBtn.onclick = () => {
+      loginForm.classList.add('active');
+      registerForm.classList.remove('active');
+      showLoginBtn.classList.add('active');
+      showRegisterBtn.classList.remove('active');
+    };
+
+    showRegisterBtn.onclick = () => {
+      loginForm.classList.remove('active');
+      registerForm.classList.add('active');
+      showLoginBtn.classList.remove('active');
+      showRegisterBtn.classList.add('active');
+    };
+
+    // Language translations object
+    const translations = {
+        en: {
+            page_title: 'Vendor Login | VendorConnect',
+            header_subtitle: 'Login or Register as a Street Food Vendor',
+            sign_in_btn: 'Sign In',
+            sign_up_btn: 'Sign Up',
+            username_placeholder: 'Username',
+            password_placeholder: 'Password',
+            sign_in_btn_form: 'Sign In',
+            full_name_placeholder: 'Full Name',
+            phone_number_placeholder: 'Phone Number',
+            vendor_type_placeholder: 'Vendor Type (e.g., Dosa, Chaat...)',
+            location_placeholder: 'Location / Place',
+            register_btn: 'Register'
+        },
+        hi: {
+            page_title: 'विक्रेता लॉगिन | वेंडरकनेक्ट',
+            header_subtitle: 'स्ट्रीट फ़ूड विक्रेता के रूप में लॉगिन या रजिस्टर करें',
+            sign_in_btn: 'साइन इन करें',
+            sign_up_btn: 'साइन अप करें',
+            username_placeholder: 'यूजरनेम',
+            password_placeholder: 'पासवर्ड',
+            sign_in_btn_form: 'साइन इन करें',
+            full_name_placeholder: 'पूरा नाम',
+            phone_number_placeholder: 'फ़ोन नंबर',
+            vendor_type_placeholder: 'विक्रेता का प्रकार (जैसे, डोसा, चाट...)',
+            location_placeholder: 'स्थान / जगह',
+            register_btn: 'रजिस्टर करें'
+        }
+    };
+
+    let currentLanguage = 'en'; // Default language
+
+    // Function to set the language and apply translations
+    function setLanguage(lang) {
+        currentLanguage = lang;
+        applyTranslations();
+    }
+
+    // Function to apply translations to elements with data-translate attribute
+    function applyTranslations() {
+        document.querySelectorAll('[data-translate]').forEach(element => {
+            const key = element.getAttribute('data-translate');
+            if (translations[currentLanguage] && translations[currentLanguage][key]) {
+                if (element.tagName === 'INPUT' || element.tagName === 'TEXTAREA') {
+                    element.placeholder = translations[currentLanguage][key];
+                } else {
+                    element.innerHTML = translations[currentLanguage][key];
+                }
+            }
+        });
+        // Update document title separately as it's not inside the body content directly accessible by data-translate
+        document.title = translations[currentLanguage]['page_title'];
+    }
+
+    // Initialize translations when the DOM is fully loaded
+    document.addEventListener('DOMContentLoaded', applyTranslations);
+  </script>
+</body>
+</html>

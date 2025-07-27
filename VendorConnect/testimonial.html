@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-translate="page_title">Testimonials</title>
+    <link rel="stylesheet" href="mainstyles.css" />
+    <style>
+        /* Basic styling for the language switcher */
+        .language-switcher-container {
+            text-align: right;
+            padding: 1rem;
+            background-color: #f8f8f8;
+            border-bottom: 1px solid #eee;
+        }
+        .language-switcher {
+            padding: 8px 15px;
+            border-radius: 5px;
+            border: 1px solid #ff6b35;
+            background-color: #fff;
+            color: #ff6b35;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="language-switcher-container">
+        <select id="languageSwitcher" class="language-switcher" onchange="setLanguage(this.value)">
+            <option value="en">English</option>
+            <option value="hi">हिन्दी</option>
+        </select>
+    </div>
+
+    <section class="testimonials-section">
+        <div class="container">
+            <h2 class="section-title scroll-reveal" data-translate="section_title">Stories from the Street</h2>
+            <div class="testimonials-grid">
+                <div class="testimonial-card scroll-reveal">
+                    <p class="testimonial-text" data-translate="testimonial_text_1">
+                        "VendorConnect changed my life! I went from selling 50 plates a day to 200+ plates. 
+                        The customer base grew so much, and I even found better suppliers through the platform."
+                    </p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">👨‍🍳</div>
+                        <div class="author-info">
+                            <h4 data-translate="author_name_1">Rajesh Kumar</h4>
+                            <p data-translate="author_role_1">Chaat Vendor, Delhi</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card scroll-reveal">
+                    <p class="testimonial-text" data-translate="testimonial_text_2">
+                        "As a woman vendor, this platform gave me confidence and visibility. Now I have regular 
+                        customers who come specifically for my dosa. The community support is amazing!"
+                    </p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">👩‍🍳</div>
+                        <div class="author-info">
+                            <h4 data-translate="author_name_2">Priya Sharma</h4>
+                            <p data-translate="author_role_2">Dosa Vendor, Mumbai</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card scroll-reveal">
+                    <p class="testimonial-text" data-translate="testimonial_text_3">
+                        "I found the best biryani vendor through this app! Now I'm a regular customer and even 
+                        help promote his business. It's created a real community around street food."
+                    </p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">😋</div>
+                        <div class="author-info">
+                            <h4 data-translate="author_name_3">Amit Patel</h4>
+                            <p data-translate="author_role_3">Food Lover, Bangalore</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Language translations object
+        const translations = {
+            en: {
+                page_title: 'Testimonials',
+                section_title: 'Stories from the Street',
+                testimonial_text_1: '"VendorConnect changed my life! I went from selling 50 plates a day to 200+ plates. The customer base grew so much, and I even found better suppliers through the platform."',
+                author_name_1: 'Rajesh Kumar',
+                author_role_1: 'Chaat Vendor, Delhi',
+                testimonial_text_2: '"As a woman vendor, this platform gave me confidence and visibility. Now I have regular customers who come specifically for my dosa. The community support is amazing!"',
+                author_name_2: 'Priya Sharma',
+                author_role_2: 'Dosa Vendor, Mumbai',
+                testimonial_text_3: '"I found the best biryani vendor through this app! Now I\'m a regular customer and even help promote his business. It\'s created a real community around street food."',
+                author_name_3: 'Amit Patel',
+                author_role_3: 'Food Lover, Bangalore'
+            },
+            hi: {
+                page_title: 'प्रशंसापत्र',
+                section_title: 'सड़क से कहानियाँ',
+                testimonial_text_1: '"वेंडरकनेक्ट ने मेरी ज़िंदगी बदल दी! मैं रोज़ाना 50 प्लेट बेचने से 200+ प्लेट तक पहुंच गया। ग्राहक आधार बहुत बढ़ गया, और मुझे प्लेटफ़ॉर्म के माध्यम से बेहतर आपूर्तिकर्ता भी मिले।"',
+                author_name_1: 'राजेश कुमार',
+                author_role_1: 'चाट विक्रेता, दिल्ली',
+                testimonial_text_2: '"एक महिला विक्रेता के रूप में, इस मंच ने मुझे आत्मविश्वास और दृश्यता दी। अब मेरे पास नियमित ग्राहक हैं जो विशेष रूप से मेरे डोसा के लिए आते हैं। समुदाय का समर्थन अद्भुत है!"',
+                author_name_2: 'प्रिया शर्मा',
+                author_role_2: 'डोसा विक्रेता, मुंबई',
+                testimonial_text_3: '"मुझे इस ऐप के माध्यम से सबसे अच्छा बिरयानी विक्रेता मिला! अब मैं एक नियमित ग्राहक हूं और यहां तक कि उसके व्यवसाय को बढ़ावा देने में भी मदद करता हूं। इसने स्ट्रीट फ़ूड के चारों ओर एक वास्तविक समुदाय बनाया है।"',
+                author_name_3: 'अमित पटेल',
+                author_role_3: 'फूड लवर, बेंगलुरु'
+            }
+        };
+
+        let currentLanguage = 'en'; // Default language
+
+        // Function to set the language and apply translations
+        function setLanguage(lang) {
+            currentLanguage = lang;
+            applyTranslations();
+        }
+
+        // Function to apply translations to elements with data-translate attribute
+        function applyTranslations() {
+            document.querySelectorAll('[data-translate]').forEach(element => {
+                const key = element.getAttribute('data-translate');
+                if (translations[currentLanguage] && translations[currentLanguage][key]) {
+                    // Use innerHTML for text that might contain HTML entities or emojis
+                    element.innerHTML = translations[currentLanguage][key];
+                }
+            });
+            // Update document title separately
+            document.title = translations[currentLanguage]['page_title'];
+        }
+
+        // Scroll reveal animation (assuming you have 'scroll-reveal' class in mainstyles.css or testimonialstyle.css)
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('revealed');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.scroll-reveal').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Initialize translations when the DOM is fully loaded
+        document.addEventListener('DOMContentLoaded', applyTranslations);
+    </script>
+</body>
+</html>

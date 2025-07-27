@@ -1,0 +1,1440 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>VendorConnect - Home</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" xintegrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        :root {
+            /* These colors align with the original screenshot's gradients */
+            --primary-orange: #f97316;
+            --secondary-yellow: #facc15;
+            --background-gradient-start: #fceabb; /* Soft peach/orange */
+            --background-gradient-end: #e2e2e2;   /* Light grey */
+            --hero-card-gradient-start: #fff0f5; /* Light pinkish */
+            --hero-card-gradient-end: #e6f7ff;   /* Light blueish */
+            --category-gradient-start: #fcd34d; /* Bright yellow */
+            --category-gradient-end: #fbbf24;   /* Deeper yellow/orange */
+            --text-color-dark: #333;
+            --text-color-medium: #555;
+            --text-color-light: #777;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            /* Applying the main background gradient from the original image */
+            background: linear-gradient(to right, var(--background-gradient-start), var(--background-gradient-end));
+            overflow-x: hidden;
+            color: var(--text-color-dark);
+            position: relative;
+        }
+
+        /* Subtle imaginary line overlay */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: 
+                linear-gradient(45deg, transparent 48%, rgba(255, 255, 255, 0.1) 49%, rgba(255, 255, 255, 0.1) 51%, transparent 52%),
+                linear-gradient(-45deg, transparent 48%, rgba(255, 255, 255, 0.05) 49%, rgba(255, 255, 255, 0.05) 51%, transparent 52%);
+            background-size: 60px 60px, 80px 80px;
+            pointer-events: none;
+            z-index: -1;
+        }
+        
+        /* Floating emoji animations for hero section */
+        .food-emoji-float {
+            position: absolute;
+            font-size: 2rem;
+            opacity: 0.7;
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(10deg); }
+        }
+        
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+            background: linear-gradient(to right, var(--background-gradient-start), var(--background-gradient-end));
+            font-family: 'Playfair Display', serif;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--primary-orange);
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+        .logo:hover {
+            transform: scale(1.05);
+        }
+
+        nav {
+            display: flex;
+            align-items: center;
+        }
+
+        nav a {
+            margin: 0 1rem;
+            text-decoration: none;
+            color: var(--text-color-dark);
+            font-weight: 500;
+            position: relative;
+            transition: color 0.3s ease;
+        }
+
+        nav a:hover {
+            color: var(--primary-orange);
+        }
+
+        .search-bar {
+            margin: 0 1rem;
+            display: flex;
+            align-items: center;
+        }
+        .search-bar input {
+            border: none;
+            background: transparent;
+            border-bottom: 1px solid #ccc;
+            outline: none;
+            padding: 0.2rem 0.5rem;
+            font-size: 1rem;
+            color: var(--text-color-medium);
+            width: 120px;
+            transition: width 0.3s ease, border-color 0.3s ease;
+        }
+        .search-bar input:focus {
+            width: 180px;
+            border-bottom-color: var(--primary-orange);
+        }
+        .search-bar i {
+            color: var(--text-color-medium);
+            margin-right: 5px;
+        }
+
+        /* Language Selector */
+        .language-selector {
+            margin-left: 1rem;
+        }
+        .language-selector select {
+            padding: 0.4rem 0.7rem;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            background-color: white;
+            font-size: 0.9rem;
+            color: var(--text-color-dark);
+            cursor: pointer;
+            outline: none;
+            transition: border-color 0.3s ease;
+        }
+        .language-selector select:hover {
+            border-color: var(--primary-orange);
+        }
+        /* End Language Selector */
+
+        .hero {
+            text-align: center;
+            padding: 4rem 2rem;
+            background: linear-gradient(to right, var(--hero-card-gradient-start), var(--hero-card-gradient-end));
+            border-radius: 20px;
+            margin: 2rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            min-height: 350px;
+        }
+
+        .hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3.5rem;
+            background: linear-gradient(to right, var(--primary-orange), var(--secondary-yellow));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 1rem;
+            animation: textPop 0.8s ease-out;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            color: var(--text-color-medium);
+            margin-bottom: 0;
+            animation: fadeIn 1s ease-out 0.2s forwards;
+            opacity: 0;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Modified Card Styles */
+        .card {
+            margin: 1.5rem auto;
+            width: 80%;
+            max-width: 700px;
+            background: white;
+            border-radius: 20px;
+            padding: 2rem; /* Increased padding for better spacing */
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            font-family: 'Inter', sans-serif;
+            transform: translateY(20px);
+            opacity: 0;
+            animation: slideInUp 0.8s ease-out forwards;
+            animation-delay: 0.4s;
+            position: relative; /* For absolute positioning of icons */
+            overflow: hidden;
+        }
+
+        .card-animation-container {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            right: 10px;
+            bottom: 10px;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            font-size: 2rem;
+            color: var(--secondary-yellow);
+            opacity: 0.3;
+            pointer-events: none; /* Allows text selection below */
+            animation: pulseIcons 5s linear infinite alternate;
+            z-index: 0; /* Ensures it's behind the text */
+        }
+
+        .card-animation-container i {
+            transform: scale(0.8);
+        }
+
+        @keyframes pulseIcons {
+            from {
+                opacity: 0.3;
+                transform: scale(0.8);
+            }
+            to {
+                opacity: 0.6;
+                transform: scale(1.1);
+            }
+        }
+
+        .card p {
+            font-size: 1.1rem; /* Slightly adjusted font size */
+            color: var(--text-color-medium);
+            margin-bottom: 0;
+            position: relative; /* Ensure text is above the icons */
+            z-index: 1;
+        }
+
+        /* --- CONTINUOUS SLIDER STYLES --- */
+        .slider {
+            width: 98%;
+            margin: 3rem auto;
+            overflow: hidden;
+            position: relative;
+            padding: 1rem 0;
+        }
+
+        .slider-track {
+            display: flex;
+            width: calc(400px * 12); /* 12 stories * 400px width each */
+            animation: slideInfinite 60s linear infinite;
+            padding: 1rem 0;
+        }
+
+        .story {
+            flex: 0 0 400px;
+            width: 400px;
+            text-align: center;
+            padding: 4rem 2.5rem 2.5rem; /* Increased padding-top for vendor graphic */
+            font-family: 'Playfair Display', serif;
+            background: #fff;
+            border-radius: 20px;
+            margin: 0 1.5rem;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        .story:hover {
+            transform: translateY(-5px) scale(1.01);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+        }
+
+        .story-vendor-graphic { /* Style for the cartoon graphics */
+            position: absolute;
+            top: 15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 60px;
+            object-fit: contain;
+            opacity: 0.8;
+            z-index: 3;
+            animation: bounceIn 1s ease-out;
+        }
+        
+        .story-text {
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+            line-height: 1.6;
+            color: #555;
+            z-index: 2;
+            position: relative;
+            flex-grow: 1;
+            display: flex;
+            align-items: center;
+            white-space: normal; /* Allow text to wrap within the container */
+            text-overflow: unset; /* Ensure text is not cut off */
+        }
+
+        .story-author {
+            font-weight: 600;
+            color: var(--primary-orange);
+            font-size: 1rem;
+            margin-top: auto;
+            z-index: 2;
+            position: relative;
+            white-space: normal; /* Allow text to wrap within the container */
+        }
+
+        .story-graphic { /* Background subtle graphics */
+            position: absolute;
+            opacity: 0.1;
+            pointer-events: none;
+            animation: rotateGraphic 10s linear infinite;
+            z-index: 1;
+        }
+
+        .story-graphic.top-left {
+            top: 10px;
+            left: 10px;
+            width: 60px;
+        }
+        .story-graphic.bottom-right {
+            bottom: 10px;
+            right: 10px;
+            width: 70px;
+        }
+        .story-graphic.center {
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0.8);
+            width: 90px;
+            animation: rotateGraphic 15s linear infinite reverse;
+        }
+
+        @keyframes slideInfinite {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(calc(-400px * 6)); } /* Move by 6 story widths */
+        }
+
+        @keyframes rotateGraphic {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        @keyframes bounceIn {
+            0% { transform: translateX(-50%) scale(0.3); opacity: 0; }
+            50% { transform: translateX(-50%) scale(1.1); opacity: 0.8; }
+            70% { transform: translateX(-50%) scale(0.9); }
+            100% { transform: translateX(-50%) scale(1); opacity: 0.8; }
+        }
+        /* --- END SLIDER STYLES --- */
+
+
+        /* --- Local Supplier Spotlight Section --- */
+        .supplier-spotlight {
+            padding: 3rem 2rem;
+            text-align: center;
+            background-color: #f9f9f9; /* Light background to stand out */
+            border-top: 1px solid #eee;
+            border-bottom: 1px solid #eee;
+            margin-top: 3rem;
+        }
+
+        .supplier-spotlight h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.2rem;
+            color: var(--primary-orange);
+            margin-bottom: 1.5rem;
+        }
+
+        .supplier-card {
+            background-color: white;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            padding: 1.5rem;
+            margin: 1rem auto;
+            max-width: 600px;
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            text-align: left;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .supplier-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+        }
+
+        .supplier-card img {
+            width: 100px;
+            height: 100px;
+            object-fit: cover;
+            border-radius: 50%;
+            border: 2px solid var(--secondary-yellow);
+            flex-shrink: 0; /* Prevent image from shrinking */
+        }
+
+        .supplier-info h3 {
+            font-weight: 600;
+            color: var(--text-color-dark);
+            margin-bottom: 0.5rem;
+        }
+
+        .supplier-info p {
+            color: var(--text-color-medium);
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+
+        /* --- Nagpur's Street Food Hotspots & Events Section (New Unique Feature) --- */
+        .hotspots-events {
+            padding: 3rem 2rem;
+            text-align: center;
+            background: linear-gradient(to right, #fef9e7, #e8f5e9); /* Soft light gradient */
+            border-top: 1px solid #eee;
+            margin-top: 3rem;
+            border-radius: 20px;
+            margin-left: 2rem;
+            margin-right: 2rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+        }
+
+        .hotspots-events h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            color: var(--primary-orange);
+            margin-bottom: 2rem;
+        }
+
+        .event-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            justify-content: center;
+        }
+
+        .event-card {
+            background-color: white;
+            border-radius: 15px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+            text-align: center;
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            cursor: pointer;
+            position: relative;
+            border: 8px solid white; /* Polaroid-style thick white border */
+            transform: rotate(-2deg); /* Slight rotation for polaroid effect */
+        }
+
+        .event-card:nth-child(2) {
+            transform: rotate(1deg);
+        }
+
+        .event-card:nth-child(3) {
+            transform: rotate(-1deg);
+        }
+
+        .event-card:hover {
+            transform: translateY(-10px) scale(1.05) rotate(0deg);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.25);
+        }
+
+        .event-card-graphic-container {
+            background: linear-gradient(135deg, #ffeaa7, #fab1a0);
+            padding: 3rem 2rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 200px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .event-card-graphic-container::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.3) 0%, transparent 70%);
+            animation: shimmer 4s ease-in-out infinite;
+        }
+
+        @keyframes shimmer {
+            0%, 100% { transform: rotate(0deg); opacity: 0.3; }
+            50% { transform: rotate(180deg); opacity: 0.1; }
+        }
+
+        .event-card-graphic {
+            width: 80px;
+            height: 80px;
+            opacity: 0.9;
+            z-index: 2;
+            animation: bounceGentle 3s ease-in-out infinite;
+            filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.2));
+        }
+
+        .event-card:nth-child(1) .event-card-graphic-container {
+            background: linear-gradient(135deg, #ff7675, #fd79a8);
+        }
+
+        .event-card:nth-child(2) .event-card-graphic-container {
+            background: linear-gradient(135deg, #74b9ff, #0984e3);
+        }
+
+        .event-card:nth-child(3) .event-card-graphic-container {
+            background: linear-gradient(135deg, #00b894, #00cec9);
+        }
+
+        @keyframes bounceGentle {
+            0%, 100% { transform: translateY(0px) rotate(0deg) scale(1); }
+            50% { transform: translateY(-8px) rotate(5deg) scale(1.1); }
+        }
+
+        .event-content {
+            padding: 1.5rem;
+            flex-grow: 1; /* Allows content to take available space */
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .event-content h3 {
+            font-weight: 600;
+            color: var(--text-color-dark);
+            margin-bottom: 0.75rem;
+            font-size: 1.3rem;
+            font-family: 'Playfair Display', serif;
+        }
+
+        .event-content p {
+            color: var(--text-color-medium);
+            font-size: 0.95rem;
+            line-height: 1.5;
+            margin-bottom: 1rem;
+        }
+
+        .event-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.85rem;
+            color: var(--text-color-light);
+            margin-top: 1rem;
+        }
+
+        .event-meta span {
+            display: flex;
+            align-items: center;
+        }
+
+        .event-meta i {
+            margin-right: 0.4rem;
+            color: var(--primary-orange);
+        }
+
+        footer {
+            background: linear-gradient(to right, var(--background-gradient-start), var(--background-gradient-end));
+            text-align: center;
+            padding: 2rem;
+            font-size: 0.9rem;
+            margin-top: 3rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .footer-graphics {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            opacity: 0.1;
+            pointer-events: none;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 2rem;
+            z-index: 0;
+        }
+
+        .footer-graphics img {
+            width: 80px;
+            height: 80px;
+            animation: floatFooter 8s ease-in-out infinite;
+        }
+
+        .footer-graphics img:nth-child(2n) {
+            animation-delay: 2s;
+        }
+
+        .footer-graphics img:nth-child(3n) {
+            animation-delay: 4s;
+        }
+
+        @keyframes floatFooter {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-15px) rotate(10deg); }
+        }
+
+        footer .columns {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            padding-bottom: 1.5rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        footer .column {
+            flex: 1;
+            margin: 1rem;
+            min-width: 250px;
+            text-align: left;
+        }
+
+        footer h3 {
+            font-family: 'Playfair Display', serif;
+            margin-bottom: 0.8rem;
+            color: var(--text-color-dark);
+            font-size: 1.1rem;
+        }
+
+        footer p {
+            line-height: 1.6;
+            color: var(--text-color-medium);
+        }
+
+        footer p i {
+            margin-right: 0.5rem;
+            color: var(--text-color-medium);
+        }
+        footer p:last-child {
+            margin-top: 1rem;
+            font-size: 0.8rem;
+            color: var(--text-color-light);
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Animations */
+        @keyframes textPop {
+            0% { transform: scale(0.8); opacity: 0; }
+            80% { transform: scale(1.05); opacity: 1; }
+            100% { transform: scale(1); }
+        }
+
+        @keyframes fadeIn {
+            to { opacity: 1; }
+        }
+
+        @keyframes slideInUp {
+            from { transform: translateY(50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        /* No pulse for the single image anymore */
+
+        /* Responsive adjustments */
+        @media (max-width: 1200px) {
+            .slider {
+                width: 90%;
+            }
+            .story {
+                flex: 0 0 350px;
+                width: 350px;
+                padding: 3rem 1.5rem 1.5rem;
+            }
+            .slider-track {
+                width: calc(350px * 12);
+            }
+            @keyframes slideInfinite {
+                0% { transform: translateX(0); }
+                100% { transform: translateX(calc(-350px * 6)); }
+            }
+        }
+
+        @media (max-width: 768px) {
+            header {
+                flex-direction: column;
+                padding: 1rem;
+            }
+            nav {
+                margin-top: 1rem;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            nav a {
+                margin: 0.5rem 0.8rem;
+            }
+            .search-bar {
+                margin: 0.5rem 0.8rem;
+            }
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            .hero p {
+                font-size: 1rem;
+            }
+            .card {
+                width: 90%;
+                margin: 1.5rem auto;
+            }
+            .story {
+                flex: 0 0 280px;
+                width: 280px;
+                margin: 0 0.5rem;
+                padding: 3rem 1.5rem 1.5rem;
+            }
+            .slider-track {
+                width: calc(280px * 12);
+                animation: slideInfinite 40s linear infinite;
+            }
+            .story-text {
+                font-size: 1rem;
+            }
+            @keyframes slideInfinite {
+                0% { transform: translateX(0); }
+                100% { transform: translateX(calc(-280px * 6)); }
+            }
+            .categories {
+                gap: 0.8rem;
+            }
+            .category {
+                padding: 0.8rem 1.5rem;
+                font-size: 0.9rem;
+            }
+            footer .column {
+                text-align: center;
+                margin: 0.8rem;
+            }
+
+            .hotspots-events h2 {
+                font-size: 1.8rem;
+            }
+
+            .language-selector {
+                margin-top: 1rem;
+                margin-left: 0;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+            .search-bar input {
+                width: 100px;
+            }
+            .search-bar input:focus {
+                width: 150px;
+            }
+            .logo {
+                font-size: 1.3rem;
+            }
+        }
+
+        /* New styles for To-Do List */
+        .todo-fab {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 60px;
+            height: 60px;
+            background-color: var(--primary-orange);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.8rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            cursor: pointer;
+            z-index: 1001;
+            transition: all 0.3s ease;
+        }
+
+        .todo-fab:hover {
+            transform: scale(1.1);
+            background-color: #e06d15;
+        }
+
+        .todo-container {
+            position: fixed;
+            bottom: 90px;
+            right: 20px;
+            width: 300px;
+            max-height: 400px;
+            background-color: white;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+            padding: 1rem;
+            z-index: 1000;
+            display: none; /* Hidden by default */
+            flex-direction: column;
+            gap: 10px;
+            overflow-y: auto;
+        }
+
+        .todo-container.active {
+            display: flex;
+        }
+
+        .todo-container h3 {
+            margin-top: 0;
+            color: var(--primary-orange);
+            text-align: center;
+        }
+
+        .todo-input-group {
+            display: flex;
+            gap: 5px;
+            margin-bottom: 10px;
+        }
+
+        .todo-input-group input {
+            flex-grow: 1;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 0.9rem;
+        }
+
+        .todo-input-group button {
+            padding: 8px 12px;
+            background-color: var(--primary-orange);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .todo-input-group button:hover {
+            background-color: #e06d15;
+        }
+
+        .todo-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .todo-list li {
+            display: flex;
+            align-items: center;
+            padding: 10px 0;
+            border-bottom: 1px solid #eee;
+            font-size: 0.95rem;
+            color: var(--text-color-dark);
+        }
+
+        .todo-list li:last-child {
+            border-bottom: none;
+        }
+
+        .todo-list li.completed span {
+            text-decoration: line-through;
+            color: var(--text-color-light);
+        }
+
+        .todo-list li span {
+            flex-grow: 1;
+            cursor: pointer;
+        }
+
+        .todo-list li .delete-btn {
+            background: none;
+            border: none;
+            color: #ff4d4d;
+            font-size: 1rem;
+            cursor: pointer;
+            margin-left: 10px;
+            transition: color 0.3s ease;
+        }
+
+        .todo-list li .delete-btn:hover {
+            color: #cc0000;
+        }
+        
+        /* New Styles for Ingredient Fusion Generator */
+        .fusion-generator {
+            padding: 3rem 2rem;
+            text-align: center;
+            background: linear-gradient(to right, #eaf6ff, #ffebe6); /* Light, cheerful gradient */
+            border-top: 1px solid #eee;
+            margin-top: 3rem;
+            border-radius: 20px;
+            margin-left: 2rem;
+            margin-right: 2rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .fusion-generator h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            color: var(--primary-orange);
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .fusion-generator h2 i {
+            font-size: 2.2rem;
+            color: var(--secondary-yellow);
+        }
+
+        .fusion-output {
+            background-color: white;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            padding: 1.5rem 2rem;
+            min-height: 100px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+            font-size: 1.3rem;
+            font-weight: 500;
+            color: var(--text-color-dark);
+            text-align: center;
+            line-height: 1.6;
+            width: 100%;
+            max-width: 600px;
+            transition: transform 0.3s ease;
+        }
+
+        .fusion-output:empty::before {
+            content: "Click 'Generate Idea' to spark your next masterpiece!";
+            color: var(--text-color-light);
+            font-style: italic;
+        }
+
+        .fusion-output:hover {
+            transform: translateY(-5px);
+        }
+
+        .generate-btn {
+            background-color: var(--primary-orange);
+            color: white;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 1.1rem;
+            font-weight: 600;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .generate-btn:hover {
+            background-color: #e06d15;
+            transform: translateY(-2px);
+        }
+        .generate-btn i {
+            font-size: 1.2rem;
+        }
+
+        @media (max-width: 768px) {
+            .fusion-generator h2 {
+                font-size: 1.8rem;
+                flex-direction: column;
+                gap: 5px;
+            }
+            .fusion-generator h2 i {
+                font-size: 1.8rem;
+            }
+            .fusion-output {
+                font-size: 1rem;
+                padding: 1rem;
+            }
+            .generate-btn {
+                padding: 0.8rem 1.5rem;
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo" onclick="location.href='index.html'">🍲 VendorConnect</div>
+        <nav>
+            <a href="vendorhome.html" data-translate-key="nav_home">Home</a>
+            <a href="mysuppliers.html" data-translate-key="nav_suppliers">Suppliers Nearby</a>
+            <a href="placeorder.html" data-translate-key="nav_place_order">Place Order</a>
+            <a href="vendorprofile.html" data-translate-key="nav_profile">Profile</a>
+        </nav>
+        <div class="language-selector">
+            <select id="languageSelector">
+                <option value="en">English</option>
+                <option value="hi">हिंदी</option>
+            </select>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="food-emoji-float" style="top: 10%; left: 10%; animation-delay: 0s;">🌮</div>
+        <div class="food-emoji-float" style="top: 20%; right: 15%; animation-delay: 1s;">🍕</div>
+        <div class="food-emoji-float" style="bottom: 20%; left: 20%; animation-delay: 2s;">🍔</div>
+        <div class="food-emoji-float" style="bottom: 30%; right: 10%; animation-delay: 3s;">🥘</div>
+        <div class="food-emoji-float" style="top: 40%; left: 80%; animation-delay: 4s;">🍜</div>
+
+        <h1 data-translate-key="hero_heading">Where Street Food Dreams Come <span style="color: var(--primary-orange);">Alive</span></h1>
+        <p data-translate-key="hero_paragraph">Connecting local street food vendors with suppliers, and opportunities. From cart to community – we're building India's largest street food ecosystem.</p>
+    </section>
+
+    <div class="card">
+        <div class="card-animation-container">
+            <i class="fas fa-utensils"></i>
+            <i class="fas fa-carrot"></i>
+            <i class="fas fa-pepper-hot"></i>
+            <i class="fas fa-bread-slice"></i>
+            <i class="fas fa-fish"></i>
+        </div>
+        <p data-translate-key="card_paragraph">Empowering vendors with reliable sourcing, visibility, and community support to thrive in the food streets of Nagpur.</p>
+    </div>
+
+    <div class="slider">
+        <div class="slider-track">
+            <div class="story">
+                <img src="https://cdn-icons-png.flaticon.com/512/9163/9163155.png" alt="Vendor Graphic" class="story-vendor-graphic">
+                <img src="https://cdn-icons-png.flaticon.com/512/3663/3663294.png" alt="Spice Graphic" class="story-graphic top-left">
+                <p class="story-text" data-translate-key="story_fatima">"Before VendorConnect, sourcing fresh vegetables and quality spices for my Biryani stall was a daily struggle. I'd waste hours negotiating and often compromise on quality. Now, with just a few taps, I get everything delivered right to my cart. My biryani has never been better, and my customers can taste the difference!"</p>
+                <img src="https://cdn-icons-png.flaticon.com/512/3663/3663294.png" alt="Spice Graphic" class="story-graphic bottom-right">
+                <span class="story-author" data-translate-key="author_fatima">– Fatima's Authentic Biryani</span>
+            </div>
+            <div class="story">
+                <img src="https://cdn-icons-png.flaticon.com/512/9595/9595822.png" alt="Vendor Graphic" class="story-vendor-graphic">
+                <img src="https://cdn-icons-png.flaticon.com/512/3063/3063073.png" alt="Chef Hat Graphic" class="story-graphic top-left">
+                <p class="story-text" data-translate-key="story_rahul">"My dream was to expand beyond my single Momos cart, but managing supplier relationships for multiple locations felt impossible. VendorConnect gave me the visibility and network I needed. I've now opened two more successful outlets, and the consistency of my ingredients across all stores is perfect. It's truly a game-changer!"</p>
+                <img src="https://cdn-icons-png.flaticon.com/512/3063/3063073.png" alt="Chef Hat Graphic" class="story-graphic bottom-right">
+                <span class="story-author" data-translate-key="author_rahul">– Rahul's Momos Mania</span>
+            </div>
+            <div class="story">
+                <img src="https://cdn-icons-png.flaticon.com/512/10002/10002985.png" alt="Vendor Graphic" class="story-vendor-graphic">
+                <img src="https://cdn-icons-png.flaticon.com/512/5787/5787076.png" alt="Chaat Icon" class="story-graphic center">
+                <p class="story-text" data-translate-key="story_anjali">"I inherited my father's chaat stall, and while the recipes were gold, the old ways of sourcing were time-consuming. VendorConnect introduced me to local suppliers I never knew existed, offering better prices and fresher produce. My profit margins have improved, and I can dedicate more time to innovating new chaat recipes!"</p>
+                <span class="story-author" data-translate-key="author_anjali">– Anjali's Classic Chaat</span>
+            </div>
+            <div class="story">
+                <img src="https://cdn-icons-png.flaticon.com/512/7594/7594504.png" alt="Vendor Graphic" class="story-vendor-graphic">
+                <img src="https://cdn-icons-png.flaticon.com/512/2927/2927909.png" alt="Pan Graphic" class="story-graphic top-left">
+                <p class="story-text" data-translate-key="story_singh">"Being a Tandoori vendor means needing a constant supply of quality meat and fresh dough. VendorConnect connected me with reliable meat suppliers and flour mills that understand bulk requirements. My tandoori rotis are consistently soft, and the kebabs are always tender. My loyal customers keep coming back!"</p>
+                <img src="https://cdn-icons-png.flaticon.com/512/2927/2927909.png" alt="Pan Graphic" class="story-graphic bottom-right">
+                <span class="story-author" data-translate-key="author_singh">– Singh Saab's Tandoor Spot</span>
+            </div>
+            <div class="story">
+                <img src="https://cdn-icons-png.flaticon.com/512/8662/8662059.png" alt="Vendor Graphic" class="story-vendor-graphic">
+                <img src="https://cdn-icons-png.flaticon.com/512/10074/10074251.png" alt="Drink Graphic" class="story-graphic top-left">
+                <p class="story-text" data-translate-key="story_deepak">"My roadside juice stall relies heavily on seasonal fruits. Before VendorConnect, finding fresh, affordable fruits was a daily struggle, especially during off-peak seasons. Now, I have access to a network of fruit suppliers, ensuring I can offer a variety of fresh juices year-round. My customers love the expanded menu!"</p>
+                <img src="https://cdn-icons-png.flaticon.com/512/10074/10074251.png" alt="Drink Graphic" class="story-graphic bottom-right">
+                <span class="story-author" data-translate-key="author_deepak">– Deepak's Fresh Juices</span>
+            </div>
+            <div class="story">
+                <img src="https://cdn-icons-png.flaticon.com/512/9634/9634033.png" alt="Vendor Graphic" class="story-vendor-graphic">
+                <img src="https://cdn-icons-png.flaticon.com/512/10328/10328905.png" alt="Ice Cream Graphic" class="story-graphic center">
+                <p class="story-text" data-translate-key="story_gopi">"Selling Kulfi requires consistent dairy supply and unique flavor ingredients. VendorConnect helped me find specialized suppliers for saffron, cardamom, and premium milk, which elevated my Kulfi's taste. I'm now known for the richest, most authentic kulfi in town, and my sales have soared!"</p>
+                <span class="story-author" data-translate-key="author_gopi">– Gopi Kulfi Wale</span>
+            </div>
+            <div class="story">
+                <img src="https://cdn-icons-png.flaticon.com/512/9163/9163155.png" alt="Vendor Graphic" class="story-vendor-graphic">
+                <img src="https://cdn-icons-png.flaticon.com/512/3663/3663294.png" alt="Spice Graphic" class="story-graphic top-left">
+                <p class="story-text" data-translate-key="story_fatima">"Before VendorConnect, sourcing fresh vegetables and quality spices for my Biryani stall was a daily struggle. I'd waste hours negotiating and often compromise on quality. Now, with just a few taps, I get everything delivered right to my cart. My biryani has never been better, and my customers can taste the difference!"</p>
+                <img src="https://cdn-icons-png.flaticon.com/512/3663/3663294.png" alt="Spice Graphic" class="story-graphic bottom-right">
+                <span class="story-author" data-translate-key="author_fatima">– Fatima's Authentic Biryani</span>
+            </div>
+            <div class="story">
+                <img src="https://cdn-icons-png.flaticon.com/512/9595/9595822.png" alt="Vendor Graphic" class="story-vendor-graphic">
+                <img src="https://cdn-icons-png.flaticon.com/512/3063/3063073.png" alt="Chef Hat Graphic" class="story-graphic top-left">
+                <p class="story-text" data-translate-key="story_rahul">"My dream was to expand beyond my single Momos cart, but managing supplier relationships for multiple locations felt impossible. VendorConnect gave me the visibility and network I needed. I've now opened two more successful outlets, and the consistency of my ingredients across all stores is perfect. It's truly a game-changer!"</p>
+                <img src="https://cdn-icons-png.flaticon.com/512/3063/3063073.png" alt="Chef Hat Graphic" class="story-graphic bottom-right">
+                <span class="story-author" data-translate-key="author_rahul">– Rahul's Momos Mania</span>
+            </div>
+            <div class="story">
+                <img src="https://cdn-icons-png.flaticon.com/512/10002/10002985.png" alt="Vendor Graphic" class="story-vendor-graphic">
+                <img src="https://cdn-icons-png.flaticon.com/512/5787/5787076.png" alt="Chaat Icon" class="story-graphic center">
+                <p class="story-text" data-translate-key="story_anjali">"I inherited my father's chaat stall, and while the recipes were gold, the old ways of sourcing were time-consuming. VendorConnect introduced me to local suppliers I never knew existed, offering better prices and fresher produce. My profit margins have improved, and I can dedicate more time to innovating new chaat recipes!"</p>
+                <span class="story-author" data-translate-key="author_anjali">– Anjali's Classic Chaat</span>
+            </div>
+            <div class="story">
+                <img src="https://cdn-icons-png.flaticon.com/512/7594/7594504.png" alt="Vendor Graphic" class="story-vendor-graphic">
+                <img src="https://cdn-icons-png.flaticon.com/512/2927/2927909.png" alt="Pan Graphic" class="story-graphic top-left">
+                <p class="story-text" data-translate-key="story_singh">"Being a Tandoori vendor means needing a constant supply of quality meat and fresh dough. VendorConnect connected me with reliable meat suppliers and flour mills that understand bulk requirements. My tandoori rotis are consistently soft, and the kebabs are always tender. My loyal customers keep coming back!"</p>
+                <img src="https://cdn-icons-png.flaticon.com/512/2927/2927909.png" alt="Pan Graphic" class="story-graphic bottom-right">
+                <span class="story-author" data-translate-key="author_singh">– Singh Saab's Tandoor Spot</span>
+            </div>
+            <div class="story">
+                <img src="https://cdn-icons-png.flaticon.com/512/8662/8662059.png" alt="Vendor Graphic" class="story-vendor-graphic">
+                <img src="https://cdn-icons-png.flaticon.com/512/10074/10074251.png" alt="Drink Graphic" class="story-graphic top-left">
+                <p class="story-text" data-translate-key="story_deepak">"My roadside juice stall relies heavily on seasonal fruits. Before VendorConnect, finding fresh, affordable fruits was a daily struggle, especially during off-peak seasons. Now, I have access to a network of fruit suppliers, ensuring I can offer a variety of fresh juices year-round. My customers love the expanded menu!"</p>
+                <img src="https://cdn-icons-png.flaticon.com/512/10074/10074251.png" alt="Drink Graphic" class="story-graphic bottom-right">
+                <span class="story-author" data-translate-key="author_deepak">– Deepak's Fresh Juices</span>
+            </div>
+            <div class="story">
+                <img src="https://cdn-icons-png.flaticon.com/512/9634/9634033.png" alt="Vendor Graphic" class="story-vendor-graphic">
+                <img src="https://cdn-icons-png.flaticon.com/512/10328/10328905.png" alt="Ice Cream Graphic" class="story-graphic center">
+                <p class="story-text" data-translate-key="story_gopi">"Selling Kulfi requires consistent dairy supply and unique flavor ingredients. VendorConnect helped me find specialized suppliers for saffron, cardamom, and premium milk, which elevated my Kulfi's taste. I'm now known for the richest, most authentic kulfi in town, and my sales have soared!"</p>
+                <span class="story-author" data-translate-key="author_gopi">– Gopi Kulfi Wale</span>
+            </div>
+        </div>
+    </div>
+
+    <section class="hotspots-events">
+        <h2 data-translate-key="hotspots_heading">🎉 Upcoming Food Events & Hotspots in Nagpur 🎉</h2>
+        <div class="event-grid">
+            <div class="event-card" onclick="openMapForEvent('Ambazari Lake, Nagpur')">
+                <div class="event-card-graphic-container">
+                    <img src="https://cdn-icons-png.flaticon.com/512/3081/3081648.png" alt="Festival Graphic" class="event-card-graphic">
+                </div>
+                <div class="event-content">
+                    <h3 data-translate-key="event1_title">Nagpur Street Food Festival</h3>
+                    <p data-translate-key="event1_description">Experience the best of Nagpur's street food scene at this grand festival featuring over 50 vendors!</p>
+                    <div class="event-meta">
+                        <span data-translate-key="event1_date"><i class="fas fa-clock"></i> Aug 15-18, 2025</span>
+                        <span data-translate-key="event1_location"><i class="fas fa-map-marker-alt"></i> Ambazari Lake Grounds</span>
+                    </div>
+                </div>
+            </div>
+            <div class="event-card" onclick="openMapForEvent('Maharajbagh Zoo, Nagpur')">
+                <div class="event-card-graphic-container">
+                    <img src="https://cdn-icons-png.flaticon.com/512/4727/4727424.png" alt="Cupcake Graphic" class="event-card-graphic">
+                </div>
+                <div class="event-content">
+                    <h3 data-translate-key="event2_title">Sweet Treat Carnival</h3>
+                    <p data-translate-key="event2_description">Indulge your sweet tooth with a wide array of desserts, pastries, and traditional Indian sweets.</p>
+                    <div class="event-meta">
+                        <span data-translate-key="event2_date"><i class="fas fa-clock"></i> Oct 10-12, 2025</span>
+                        <span data-translate-key="event2_location"><i class="fas fa-map-marker-alt"></i> Maharajbagh Campus</span>
+                    </div>
+                </div>
+            </div>
+            <div class="event-card" onclick="openMapForEvent('Variety Square, Nagpur')">
+                <div class="event-card-graphic-container">
+                    <img src="https://cdn-icons-png.flaticon.com/512/3075/3075977.png" alt="Food Truck Graphic" class="event-card-graphic">
+                </div>
+                <div class="event-content">
+                    <h3 data-translate-key="event3_title">Variety Square - The Evening Hub</h3>
+                    <p data-translate-key="event3_description">A perennial favorite, Variety Square comes alive every evening with a multitude of food vendors offering everything from Pav Bhaji to Chinese.</p>
+                    <div class="event-meta">
+                        <span data-translate-key="event3_date"><i class="fas fa-clock"></i> Daily, 5 PM onwards</span>
+                        <span data-translate-key="event3_location"><i class="fas fa-map-marker-alt"></i> Variety Square</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="fusion-generator">
+        <h2 data-translate-key="fusion_heading"><i class="fas fa-lightbulb"></i> Ignite Your Culinary Creativity!</h2>
+        <div id="fusionOutput" class="fusion-output"></div>
+        <button id="generateFusionBtn" class="generate-btn" data-translate-key="fusion_button">
+            <i class="fas fa-magic"></i> Generate Fusion Idea
+        </button>
+    </section>
+
+    <footer>
+        <div class="footer-graphics">
+            <img src="https://cdn-icons-png.flaticon.com/512/1046/1046784.png" alt="Pizza">
+            <img src="https://cdn-icons-png.flaticon.com/512/1046/1046751.png" alt="Hamburger">
+            <img src="https://cdn-icons-png.flaticon.com/512/1625/1625048.png" alt="Taco">
+            <img src="https://cdn-icons-png.flaticon.com/512/1046/1046747.png" alt="Hot Dog">
+            <img src="https://cdn-icons-png.flaticon.com/512/1625/1625052.png" alt="Donut">
+            <img src="https://cdn-icons-png.flaticon.com/512/1046/1046769.png" alt="Ice Cream">
+        </div>
+        <div class="columns">
+            <div class="column">
+                <h3 data-translate-key="footer_logo_title">🍲 VendorConnect</h3>
+                <p data-translate-key="footer_logo_description">Empowering street food vendors and connecting communities through authentic flavors and shared experiences.</p>
+            </div>
+            <div class="column">
+                <h3 data-translate-key="footer_quick_links_title">Quick Links</h3>
+                <p>
+                    <a href="vendorhome.html" style="color: inherit; text-decoration: none;" data-translate-key="nav_home">Home</a><br>
+                    <a href="mysuppliers.html" style="color: inherit; text-decoration: none;" data-translate-key="nav_suppliers">Suppliers Nearby</a><br>
+                    <a href="myorders.html" style="color: inherit; text-decoration: none;" data-translate-key="footer_my_orders">Order History</a><br>
+                    <a href="vendorprofile.html" style="color: inherit; text-decoration: none;" data-translate-key="nav_profile">Profile</a>
+                </p>
+            </div>
+            <div class="column">
+                <h3 data-translate-key="footer_contact_title">Contact</h3>
+                <p data-translate-key="footer_contact_email">📧 hello@vendorconnect.com<br>📞 +91 99999 99999<br>📍 India<br>🕒 24/7 Support</p>
+            </div>
+        </div>
+        <p data-translate-key="footer_copyright">© 2025 VendorConnect. Made with <i class="fas fa-heart" style="color: red;"></i> for Street Food Community in Nagpur.</p>
+    </footer>
+
+    <div class="todo-fab" id="todoFab">
+        <i class="fas fa-list-check"></i>
+    </div>
+
+    <div class="todo-container" id="todoContainer">
+        <h3 data-translate-key="todo_heading">My To-Do List</h3>
+        <div class="todo-input-group">
+            <input type="text" id="todoInput" data-translate-key="todo_input_placeholder" placeholder="Add a new task..." />
+            <button id="addTodoBtn" data-translate-key="todo_add_button">Add</button>
+        </div>
+        <ul class="todo-list" id="todoList">
+            </ul>
+    </div>
+
+    <script>
+        const translations = {
+            en: {
+                nav_home: "Home",
+                nav_suppliers: "Suppliers Nearby",
+                nav_place_order: "Place Order",
+                nav_profile: "Profile",
+                hero_heading: "Where Street Food Dreams Come <span style=\"color: var(--primary-orange);\">Alive</span>",
+                hero_paragraph: "Connecting local street food vendors with suppliers, and opportunities. From cart to community – we're building India's largest street food ecosystem.",
+                card_paragraph: "Empowering vendors with reliable sourcing, visibility, and community support to thrive in the food streets of Nagpur.",
+                story_fatima: "\"Before VendorConnect, sourcing fresh vegetables and quality spices for my Biryani stall was a daily struggle. I'd waste hours negotiating and often compromise on quality. Now, with just a few taps, I get everything delivered right to my cart. My biryani has never been better, and my customers can taste the difference!\"",
+                author_fatima: "– Fatima's Authentic Biryani",
+                story_rahul: "\"My dream was to expand beyond my single Momos cart, but managing supplier relationships for multiple locations felt impossible. VendorConnect gave me the visibility and network I needed. I've now opened two more successful outlets, and the consistency of my ingredients across all stores is perfect. It's truly a game-changer!\"",
+                author_rahul: "– Rahul's Momos Mania",
+                story_anjali: "\"I inherited my father's chaat stall, and while the recipes were gold, the old ways of sourcing were time-consuming. VendorConnect introduced me to local suppliers I never knew existed, offering better prices and fresher produce. My profit margins have improved, and I can dedicate more time to innovating new chaat recipes!\"",
+                author_anjali: "– Anjali's Classic Chaat",
+                story_singh: "\"Being a Tandoori vendor means needing a constant supply of quality meat and fresh dough. VendorConnect connected me with reliable meat suppliers and flour mills that understand bulk requirements. My tandoori rotis are consistently soft, and the kebabs are always tender. My loyal customers keep coming back!\"",
+                author_singh: "– Singh Saab's Tandoor Spot",
+                story_deepak: "\"My roadside juice stall relies heavily on seasonal fruits. Before VendorConnect, finding fresh, affordable fruits was a daily struggle, especially during off-peak seasons. Now, I have access to a network of fruit suppliers, ensuring I can offer a variety of fresh juices year-round. My customers love the expanded menu!\"",
+                author_deepak: "– Deepak's Fresh Juices",
+                story_gopi: "\"Selling Kulfi requires consistent dairy supply and unique flavor ingredients. VendorConnect helped me find specialized suppliers for saffron, cardamom, and premium milk, which elevated my Kulfi's taste. I'm now known for the richest, most authentic kulfi in town, and my sales have soared!\"",
+                author_gopi: "– Gopi Kulfi Wale",
+                hotspots_heading: "🎉 Upcoming Food Events & Hotspots in Nagpur 🎉",
+                event1_title: "Nagpur Street Food Festival",
+                event1_description: "Experience the best of Nagpur's street food scene at this grand festival featuring over 50 vendors!",
+                event1_date: "<i class=\"fas fa-clock\"></i> Aug 15-18, 2025",
+                event1_location: "<i class=\"fas fa-map-marker-alt\"></i> Ambazari Lake Grounds",
+                event2_title: "Sweet Treat Carnival",
+                event2_description: "Indulge your sweet tooth with a wide array of desserts, pastries, and traditional Indian sweets.",
+                event2_date: "<i class=\"fas fa-clock\"></i> Oct 10-12, 2025",
+                event2_location: "<i class=\"fas fa-map-marker-alt\"></i> Maharajbagh Campus",
+                event3_title: "Variety Square - The Evening Hub",
+                event3_description: "A perennial favorite, Variety Square comes alive every evening with a multitude of food vendors offering everything from Pav Bhaji to Chinese.",
+                event3_date: "<i class=\"fas fa-clock\"></i> Daily, 5 PM onwards",
+                event3_location: "<i class=\"fas fa-map-marker-alt\"></i> Variety Square",
+                fusion_heading: "<i class=\"fas fa-lightbulb\"></i> Ignite Your Culinary Creativity!",
+                fusion_output_placeholder: "Click 'Generate Idea' to spark your next masterpiece!",
+                fusion_button: "<i class=\"fas fa-magic\"></i> Generate Fusion Idea",
+                footer_logo_title: "🍲 VendorConnect",
+                footer_logo_description: "Empowering street food vendors and connecting communities through authentic flavors and shared experiences.",
+                footer_quick_links_title: "Quick Links",
+                footer_my_orders: "Order History",
+                footer_contact_title: "Contact",
+                footer_contact_email: "📧 hello@vendorconnect.com<br>📞 +91 99999 99999<br>📍 India<br>🕒 24/7 Support",
+                footer_copyright: "© 2025 VendorConnect. Made with <i class=\"fas fa-heart\" style=\"color: red;\"></i> for Street Food Community in Nagpur.",
+                todo_heading: "My To-Do List",
+                todo_input_placeholder: "Add a new task...",
+                todo_add_button: "Add"
+            },
+            hi: {
+                nav_home: "मुख्य पृष्ठ",
+                nav_suppliers: "निकटवर्ती आपूर्तिकर्ता",
+                nav_place_order: "ऑर्डर दें",
+                nav_profile: "प्रोफ़ाइल",
+                hero_heading: "जहाँ स्ट्रीट फूड के सपने <span style=\"color: var(--primary-orange);\">सच होते हैं</span>",
+                hero_paragraph: "स्थानीय स्ट्रीट फूड विक्रेताओं को आपूर्तिकर्ताओं और अवसरों से जोड़ना। ठेले से समुदाय तक - हम भारत का सबसे बड़ा स्ट्रीट फूड इकोसिस्टम बना रहे हैं।",
+                card_paragraph: "नागपुर की फूड स्ट्रीट्स में फलने-फूलने के लिए विश्वसनीय सोर्सिंग, दृश्यता और सामुदायिक सहायता के साथ विक्रेताओं को सशक्त बनाना।",
+                story_fatima: "\"वेंडरकनेक्ट से पहले, मेरे बिरयानी स्टॉल के लिए ताजी सब्जियां और अच्छी गुणवत्ता के मसाले ढूंढना एक दैनिक संघर्ष था। मैं घंटों मोलभाव करने में बर्बाद करती थी और अक्सर गुणवत्ता से समझौता करती थी। अब, बस कुछ ही टैप से, मुझे सब कुछ सीधे मेरे ठेले पर मिल जाता है। मेरी बिरयानी कभी इतनी अच्छी नहीं बनी थी, और मेरे ग्राहक फर्क महसूस कर सकते हैं!\"",
+                author_fatima: "– फातिमा की प्रामाणिक बिरयानी",
+                story_rahul: "\"मेरा सपना अपने मोमोस कार्ट से आगे बढ़ने का था, लेकिन कई स्थानों के लिए आपूर्तिकर्ता संबंधों का प्रबंधन करना असंभव लगता था। वेंडरकनेक्ट ने मुझे वह दृश्यता और नेटवर्क दिया जिसकी मुझे ज़रूरत थी। मैंने अब दो और सफल आउटलेट खोले हैं, और सभी स्टोरों में मेरे सामग्रियों की स्थिरता एकदम सही है। यह वास्तव में एक गेम-चेंजर है!\"",
+                author_rahul: "– राहुल का मोमोस मेनिया",
+                story_anjali: "\"मुझे अपने पिता का चाट स्टॉल विरासत में मिला था, और जबकि व्यंजन स्वर्णिम थे, सोर्सिंग के पुराने तरीके समय लेने वाले थे। वेंडरकनेक्ट ने मुझे उन स्थानीय आपूर्तिकर्ताओं से परिचित कराया जिनके बारे में मैं कभी नहीं जानती थी, बेहतर कीमतें और ताजे उत्पाद पेश करते थे। मेरे लाभ मार्जिन में सुधार हुआ है, और मैं नए चाट व्यंजनों को नया करने में अधिक समय समर्पित कर सकती हूँ!\"",
+                author_anjali: "– अंजलि का क्लासिक चाट",
+                story_singh: "\"एक तंदूरी विक्रेता होने का मतलब है गुणवत्ता वाले मांस और ताजे आटे की निरंतर आपूर्ति की आवश्यकता। वेंडरकनेक्ट ने मुझे विश्वसनीय मांस आपूर्तिकर्ताओं और आटा मिलों से जोड़ा जो थोक आवश्यकताओं को समझते हैं। मेरी तंदूरी रोटियां लगातार नरम रहती हैं, और कबाब हमेशा नरम होते हैं। मेरे वफादार ग्राहक वापस आते रहते हैं!\"",
+                author_singh: "– सिंह साब का तंदूर स्पॉट",
+                story_deepak: "\"मेरा सड़क के किनारे का जूस स्टॉल मौसमी फलों पर बहुत निर्भर करता है। वेंडरकनेक्ट से पहले, ताजे, किफायती फल ढूंढना एक दैनिक संघर्ष था, खासकर ऑफ-पीक सीजन के दौरान। अब, मेरे पास फल आपूर्तिकर्ताओं का एक नेटवर्क है, यह सुनिश्चित करते हुए कि मैं साल भर विभिन्न प्रकार के ताजे जूस पेश कर सकूं। मेरे ग्राहक विस्तारित मेनू पसंद करते हैं!\"",
+                author_deepak: "– दीपक के ताजे जूस",
+                story_gopi: "\"कुल्फी बेचने के लिए लगातार डेयरी आपूर्ति और अद्वितीय स्वाद सामग्री की आवश्यकता होती है। वेंडरकनेक्ट ने मुझे केसर, इलायची और प्रीमियम दूध के लिए विशेष आपूर्तिकर्ता ढूंढने में मदद की, जिससे मेरी कुल्फी का स्वाद बढ़ गया। मैं अब शहर में सबसे अमीर, सबसे प्रामाणिक कुल्फी के लिए जाना जाता हूं, और मेरी बिक्री बढ़ गई है!\"",
+                author_gopi: "– गोपी कुल्फी वाले",
+                hotspots_heading: "🎉 नागपुर में आगामी खाद्य कार्यक्रम और हॉटस्पॉट 🎉",
+                event1_title: "नागपुर स्ट्रीट फूड फेस्टिवल",
+                event1_description: "50 से अधिक विक्रेताओं के साथ इस भव्य उत्सव में नागपुर के स्ट्रीट फूड दृश्य का सबसे अच्छा अनुभव करें!",
+                event1_date: "<i class=\"fas fa-clock\"></i> 15-18 अगस्त, 2025",
+                event1_location: "<i class=\"fas fa-map-marker-alt\"></i> अंबाझरी झील मैदान",
+                event2_title: "स्वीट ट्रीट कार्निवल",
+                event2_description: "मिठाइयों, पेस्ट्री और पारंपरिक भारतीय मिठाइयों की विस्तृत श्रृंखला के साथ अपनी मीठी दावत का आनंद लें।",
+                event2_date: "<i class=\"fas fa-clock\"></i> 10-12 अक्टूबर, 2025",
+                event2_location: "<i class=\"fas fa-map-marker-alt\"></i> महाराजबाग परिसर",
+                event3_title: "वैराइटी स्क्वायर - शाम का केंद्र",
+                event3_description: "एक बारहमासी पसंदीदा, वैराइटी स्क्वायर हर शाम पाव भाजी से लेकर चाइनीज तक सब कुछ पेश करने वाले कई खाद्य विक्रेताओं के साथ जीवंत हो उठता है।",
+                event3_date: "<i class=\"fas fa-clock\"></i> प्रतिदिन, शाम 5 बजे से",
+                event3_location: "<i class=\"fas fa-map-marker-alt\"></i> वैराइटी स्क्वायर",
+                fusion_heading: "<i class=\"fas fa-lightbulb\"></i> अपनी पाक रचनात्मकता को प्रज्वलित करें!",
+                fusion_output_placeholder: "'आइडिया जनरेट करें' पर क्लिक करके अपनी अगली उत्कृष्ट कृति को प्रज्वलित करें!",
+                fusion_button: "<i class=\"fas fa-magic\"></i> फ्यूजन आइडिया जनरेट करें",
+                footer_logo_title: "🍲 वेंडरकनेक्ट",
+                footer_logo_description: "स्ट्रीट फूड विक्रेताओं को सशक्त बनाना और प्रामाणिक स्वादों और साझा अनुभवों के माध्यम से समुदायों को जोड़ना।",
+                footer_quick_links_title: "त्वरित लिंक",
+                footer_my_orders: "ऑर्डर इतिहास",
+                footer_contact_title: "संपर्क करें",
+                footer_contact_email: "📧 hello@vendorconnect.com<br>📞 +91 99999 99999<br>📍 भारत<br>🕒 24/7 सहायता",
+                footer_copyright: "© 2025 वेंडरकनेक्ट। नागपुर में स्ट्रीट फूड समुदाय के लिए ❤️ से निर्मित।"
+                ,
+                todo_heading: "मेरी कार्य सूची",
+                todo_input_placeholder: "एक नया कार्य जोड़ें...",
+                todo_add_button: "जोड़ें"
+            }
+        };
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const todoFab = document.getElementById('todoFab');
+            const todoContainer = document.getElementById('todoContainer');
+            const todoInput = document.getElementById('todoInput');
+            const addTodoBtn = document.getElementById('addTodoBtn');
+            const todoList = document.getElementById('todoList');
+            const languageSelector = document.getElementById('languageSelector');
+
+            // Set initial language from localStorage or default to 'en'
+            const currentLang = localStorage.getItem('lang') || 'en';
+            languageSelector.value = currentLang;
+            applyLanguage(currentLang);
+
+            // Toggle to-do list visibility
+            todoFab.addEventListener('click', () => {
+                todoContainer.classList.toggle('active');
+            });
+
+            // Add new to-do item
+            addTodoBtn.addEventListener('click', addTodoItem);
+            todoInput.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') {
+                    addTodoItem();
+                }
+            });
+
+            function addTodoItem() {
+                const taskText = todoInput.value.trim();
+                if (taskText !== '') {
+                    const listItem = document.createElement('li');
+                    
+                    const taskSpan = document.createElement('span');
+                    taskSpan.textContent = taskText;
+                    taskSpan.addEventListener('click', () => {
+                        listItem.classList.toggle('completed');
+                    });
+
+                    const deleteButton = document.createElement('button');
+                    deleteButton.textContent = '✖'; // Multiplication sign for delete
+                    deleteButton.classList.add('delete-btn');
+                    deleteButton.addEventListener('click', () => {
+                        todoList.removeChild(listItem);
+                    });
+
+                    listItem.appendChild(taskSpan);
+                    listItem.appendChild(deleteButton);
+                    todoList.appendChild(listItem);
+                    todoInput.value = ''; // Clear input field
+                }
+            }
+
+            // Language switching logic
+            languageSelector.addEventListener('change', (event) => {
+                const selectedLang = event.target.value;
+                localStorage.setItem('lang', selectedLang); // Save preference
+                applyLanguage(selectedLang);
+            });
+
+            function applyLanguage(lang) {
+                document.querySelectorAll('[data-translate-key]').forEach(element => {
+                    const key = element.getAttribute('data-translate-key');
+                    if (translations[lang] && translations[lang][key]) {
+                        element.innerHTML = translations[lang][key];
+                    }
+                });
+                // Special handling for placeholder
+                const fusionOutput = document.getElementById('fusionOutput');
+                if (fusionOutput && fusionOutput.innerHTML === '') { // Only update if empty
+                    fusionOutput.innerHTML = translations[lang]['fusion_output_placeholder'];
+                }
+                const todoInput = document.getElementById('todoInput');
+                if (todoInput) {
+                    todoInput.placeholder = translations[lang]['todo_input_placeholder'];
+                }
+            }
+
+            // Ingredient Fusion Generator Logic
+            const proteins = ['Chicken', 'Paneer', 'Lentils', 'Chickpeas', 'Eggs', 'Potatoes', 'Tofu', 'Mutton'];
+            const vegetables = ['Cabbage', 'Onion', 'Bell Pepper', 'Spinach', 'Corn', 'Mushrooms', 'Cauliflower', 'Broccoli'];
+            const spicesFlavors = ['Cumin', 'Turmeric', 'Chili', 'Ginger-Garlic', 'Tamarind', 'Coconut', 'Mint', 'Lemon', 'Curry Leaves', 'Coriander', 'Garlic Butter'];
+            const bases = ['Rice', 'Noodles', 'Bread', 'Puri', 'Dosa', 'Pao', 'Wrap', 'Samosa Shell'];
+            
+            const fusionOutput = document.getElementById('fusionOutput');
+            const generateFusionBtn = document.getElementById('generateFusionBtn');
+
+            function getRandomElement(arr) {
+                return arr[Math.floor(Math.random() * arr.length)];
+            }
+
+            generateFusionBtn.addEventListener('click', () => {
+                const randomProtein = getRandomElement(proteins);
+                const randomVegetable = getRandomElement(vegetables);
+                const randomSpiceFlavor = getRandomElement(spicesFlavors);
+                const randomBase = getRandomElement(bases);
+
+                const fusionIdea = `Try a <b>${randomProtein}, ${randomVegetable} & ${randomSpiceFlavor} ${randomBase}</b> fusion!`;
+                fusionOutput.innerHTML = fusionIdea;
+            });
+
+            // Set initial placeholder for fusion generator if it's empty
+            if (fusionOutput.innerHTML === '') {
+                const currentLangForPlaceholder = localStorage.getItem('lang') || 'en';
+                fusionOutput.innerHTML = translations[currentLangForPlaceholder]['fusion_output_placeholder'];
+            }
+        });
+
+        // Function to open map for an event location
+        function openMapForEvent(location) {
+            // Correct Google Maps URL for searching a place
+            const mapUrl = `https://www.google.com/maps/search/${encodeURIComponent(location)}`;
+            window.open(mapUrl, '_blank');
+        }
+    </script>
+</body>
+</html>
