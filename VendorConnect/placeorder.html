@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-translate="page_title">VendorConnect - Street Food Supply</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+            background: linear-gradient(135deg, #ebe6e1 0%, #e8e3de 25%, #e2ddd8 50%, #ddd8d3 75%, #d8d3ce 100%);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 24px 48px;
+            position: relative;
+            z-index: 10;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 1.75rem;
+            font-weight: 700;
+            font-family: 'Playfair Display', serif;
+            color: #e67e22;
+            letter-spacing: -0.02em;
+        }
+
+        .logo::before {
+            content: "🛒";
+            font-size: 2rem;
+            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1));
+        }
+
+        .nav {
+            display: flex;
+            gap: 40px;
+        }
+
+        .nav a {
+            text-decoration: none;
+            color: #8b6f47;
+            font-weight: 500;
+            font-size: 1.1rem;
+            font-family: 'Inter', sans-serif;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav a:hover {
+            color: #d35400;
+        }
+
+        .nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #e67e22;
+            transition: width 0.3s ease;
+        }
+
+        .nav a:hover::after {
+            width: 100%;
+        }
+
+        .hero {
+            position: relative;
+            text-align: center;
+            padding: 80px 60px;
+            background: rgba(255, 255, 255, 0.25);
+            backdrop-filter: blur(20px);
+            border-radius: 24px;
+            margin: 60px 60px 40px 60px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            font-family: 'Playfair Display', serif;
+            background: linear-gradient(135deg, #e67e22 0%, #d35400 50%, #c0392b 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 24px;
+            font-weight: 700;
+            line-height: 1.1;
+            letter-spacing: -0.03em;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            font-family: 'Inter', sans-serif;
+            color: #8b7355;
+            max-width: 680px;
+            margin: 0 auto;
+            line-height: 1.7;
+            font-weight: 400;
+        }
+
+        .container {
+            max-width: 1300px;
+            margin: 0 auto;
+            padding: 0 40px 60px 40px;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            font-family: 'Playfair Display', serif;
+            background: linear-gradient(135deg, #d35400 0%, #e67e22 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 50px;
+            font-weight: 600;
+            letter-spacing: -0.02em;
+        }
+
+        .items-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
+        }
+
+        .item-card {
+            background: rgba(233, 193, 231, 0.35);
+            backdrop-filter: blur(20px);
+            border-radius: 20px;
+            padding: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .item-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #e67e22, #d35400);
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+
+        .item-card:hover {
+            transform: translateY(-12px);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
+            border-color: rgba(230, 126, 34, 0.5);
+        }
+
+        .item-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .item-name {
+            font-size: 1.6rem;
+            font-weight: 600;
+            font-family: 'Playfair Display', serif;
+            color: #d35400;
+            margin-bottom: 12px;
+            letter-spacing: -0.01em;
+        }
+
+        .supplier-name {
+            font-size: 1.1rem;
+            font-family: 'Inter', sans-serif;
+            color: #8b7355;
+            margin-bottom: 20px;
+            font-weight: 500;
+        }
+
+        .supplier-name::before {
+            content: "Supplier: ";
+            font-weight: 600;
+            color: #a0522d;
+        }
+
+        .item-details {
+            list-style: none;
+            margin-bottom: 20px;
+        }
+
+        .item-details li {
+            padding: 12px 0;
+            border-bottom: 1px solid rgba(139, 115, 85, 0.2);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .item-details li:last-child {
+            border-bottom: none;
+        }
+
+        .detail-label {
+            font-weight: 600;
+            font-family: 'Inter', sans-serif;
+            color: #8b4513;
+            font-size: 0.95rem;
+        }
+
+        .detail-value {
+            color: #5d4e37;
+            font-family: 'Inter', sans-serif;
+            font-weight: 500;
+            font-size: 0.95rem;
+        }
+
+        .price {
+            color: #e67e22;
+            font-family: 'Inter', sans-serif;
+            font-weight: 700;
+            font-size: 1.3rem;
+        }
+
+        .stock-status {
+            padding: 6px 14px;
+            border-radius: 25px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .in-stock {
+            background: linear-gradient(135deg, #d5f4e6, #c8f7dc);
+            color: #27ae60;
+            border: 1px solid rgba(39, 174, 96, 0.3);
+        }
+
+        .low-stock {
+            background: linear-gradient(135deg, #fef9e7, #fcf3cd);
+            color: #f39c12;
+            border: 1px solid rgba(243, 156, 18, 0.3);
+        }
+
+        .out-of-stock {
+            background: linear-gradient(135deg, #fadbd8, #f5b7b1);
+            color: #e74c3c;
+            border: 1px solid rgba(231, 76, 60, 0.3);
+        }
+
+        .buy-now-btn {
+            width: 100%;
+            padding: 12px 20px;
+            background: linear-gradient(135deg, #e67e22, #d35400);
+            color: white;
+            border: none;
+            border-radius: 25px;
+            font-size: 1rem;
+            font-weight: 600;
+            font-family: 'Inter', sans-serif;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-top: 15px;
+        }
+
+        .buy-now-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(230, 126, 34, 0.4);
+            background: linear-gradient(135deg, #d35400, #c0392b);
+        }
+
+        .buy-now-btn:active {
+            transform: translateY(0);
+        }
+
+        .buy-now-btn.disabled {
+            background: #95a5a6;
+            cursor: not-allowed;
+            opacity: 0.6;
+        }
+
+        .buy-now-btn.disabled:hover {
+            transform: none;
+            box-shadow: none;
+        }
+
+        .floating-icons {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            z-index: 1000;
+        }
+
+        .floating-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #e67e22, #d35400);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.2rem;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .floating-icon:hover {
+            transform: scale(1.1);
+        }
+
+        .view-orders-btn {
+            background-color: #f39c12; /* A shade of orange */
+            color: white;
+            padding: 10px 20px;
+            border-radius: 20px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: background-color 0.3s ease;
+            /*margin-left: auto; /* Push to the right */
+        }
+
+        .view-orders-btn:hover {
+            background-color: #e67e22; /* Darker orange on hover */
+        }
+
+        .language-switcher {
+            padding: 8px 15px;
+            border-radius: 5px;
+            border: 1px solid #e67e22;
+            background-color: #fff;
+            color: #e67e22;
+            cursor: pointer;
+            font-size: 1rem;
+            margin-left: 20px; /* Space from the "View My Orders" button */
+        }
+
+        @media (max-width: 768px) {
+            .header {
+                flex-direction: column; /* Stack items vertically */
+                padding: 15px 20px;
+                gap: 15px; /* Space between logo, button, and switcher */
+            }
+
+            .header .logo {
+                margin-bottom: 0; /* Adjust if needed */
+            }
+
+            .header .view-orders-btn {
+                margin-left: 0; /* Remove auto margin for stacking */
+            }
+
+            .header .language-switcher {
+                margin-left: 0; /* Remove left margin for stacking */
+                margin-top: 10px; /* Add top margin for separation */
+            }
+
+            .hero {
+                margin: 20px;
+                padding: 40px 20px;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .container {
+                padding: 20px;
+            }
+
+            .items-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .floating-icons {
+                bottom: 20px;
+                right: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="logo">VendorConnect</div>
+        <div>
+            <a href="vendorprofile.html?section=orders" class="view-orders-btn" data-translate="view_orders_btn">View My Orders</a>
+            <select id="languageSwitcher" class="language-switcher" onchange="setLanguage(this.value)">
+                <option value="en">English</option>
+                <option value="hi">हिन्दी</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="container">
+        <h2 class="section-title" data-translate="supplies_title">Supplies</h2>
+
+        <div class="items-grid">
+            <div class="item-card">
+                <div class="item-name" data-translate="item_burger_patties_name">Fresh Burger Patties</div>
+                <div class="supplier-name" data-translate="supplier_veggie_mart">Fresh Veggie Mart</div>
+                <ul class="item-details">
+                    <li>
+                        <span class="detail-label" data-translate="unit_label">Unit:</span>
+                        <span class="detail-value" data-translate="unit_kg">Per kg</span>
+                    </li>
+                    <li>
+                        <span class="detail-label" data-translate="price_label">Price:</span>
+                        <span class="detail-value price" data-translate="price_burger_patties">₹450/kg</span>
+                    </li>
+                    <li>
+                        <span class="detail-label" data-translate="min_order_label">Minimum Order:</span>
+                        <span class="detail-value" data-translate="min_order_burger_patties">5kg</span>
+                    </li>
+                    <li>
+                        <span class="detail-label" data-translate="availability_label">Availability:</span>
+                        <span class="detail-value stock-status in-stock" data-translate="status_available">Available</span>
+                    </li>
+                </ul>
+                <button class="buy-now-btn" data-item-name="Fresh Burger Patties" data-supplier-name="Fresh Veggie Mart" data-item-price="450.00" data-item-unit="kg" data-min-order="5" data-translate="buy_now_btn">
+                    🛒 Buy Now
+                </button>
+            </div>
+
+            <div class="item-card">
+                <div class="item-name" data-translate="item_cooking_oil_name">Cooking Oil (Refined)</div>
+                <div class="supplier-name" data-translate="supplier_grain_master">Grain Master Co.</div>
+                <ul class="item-details">
+                    <li>
+                        <span class="detail-label" data-translate="unit_label">Unit:</span>
+                        <span class="detail-value" data-translate="unit_liter">Per liter</span>
+                    </li>
+                    <li>
+                        <span class="detail-label" data-translate="price_label">Price:</span>
+                        <span class="detail-value price" data-translate="price_cooking_oil">₹120/L</span>
+                    </li>
+                    <li>
+                        <span class="detail-label" data-translate="min_order_label">Minimum Order:</span>
+                        <span class="detail-value" data-translate="min_order_cooking_oil">20L</span>
+                    </li>
+                    <li>
+                        <span class="detail-label" data-translate="availability_label">Availability:</span>
+                        <span class="detail-value stock-status out-of-stock" data-translate="status_out_of_stock">Out Of Stock</span>
+                    </li>
+                </ul>
+                <button class="buy-now-btn disabled" disabled data-translate="out_of_stock_btn">
+                    ❌ Out of Stock
+                </button>
+            </div>
+
+            <div class="item-card">
+                <div class="item-name" data-translate="item_masala_name">Masala Spice Mix</div>
+                <div class="supplier-name" data-translate="supplier_spice_kingdom">Spice Kingdom</div>
+                <ul class="item-details">
+                    <li>
+                        <span class="detail-label" data-translate="unit_label">Unit:</span>
+                        <span class="detail-value" data-translate="unit_kg">Per kg</span>
+                    </li>
+                    <li>
+                        <span class="detail-label" data-translate="price_label">Price:</span>
+                        <span class="detail-value price" data-translate="price_masala">₹280/kg</span>
+                    </li>
+                    <li>
+                        <span class="detail-label" data-translate="min_order_label">Minimum Order:</span>
+                        <span class="detail-value" data-translate="min_order_masala">2kg</span>
+                    </li>
+                    <li>
+                        <span class="detail-label" data-translate="availability_label">Availability:</span>
+                        <span class="detail-value stock-status in-stock" data-translate="status_available">Available</span>
+                    </li>
+                </ul>
+                <button class="buy-now-btn" data-item-name="Masala Spice Mix" data-supplier-name="Spice Kingdom" data-item-price="280.00" data-item-unit="kg" data-min-order="2" data-translate="buy_now_btn">
+                    🛒 Buy Now
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const translations = {
+            en: {
+                page_title: 'VendorConnect - Street Food Supply',
+                view_orders_btn: 'View My Orders',
+                supplies_title: 'Supplies',
+                item_burger_patties_name: 'Fresh Burger Patties',
+                supplier_veggie_mart: 'Fresh Veggie Mart',
+                unit_label: 'Unit:',
+                unit_kg: 'Per kg',
+                price_label: 'Price:',
+                price_burger_patties: '₹450/kg',
+                min_order_label: 'Minimum Order:',
+                min_order_burger_patties: '5kg',
+                availability_label: 'Availability:',
+                status_available: 'Available',
+                buy_now_btn: '🛒 Buy Now',
+                item_cooking_oil_name: 'Cooking Oil (Refined)',
+                supplier_grain_master: 'Grain Master Co.',
+                unit_liter: 'Per liter',
+                price_cooking_oil: '₹120/L',
+                min_order_cooking_oil: '20L',
+                status_out_of_stock: 'Out Of Stock',
+                out_of_stock_btn: '❌ Out of Stock',
+                item_masala_name: 'Masala Spice Mix',
+                supplier_spice_kingdom: 'Spice Kingdom',
+                price_masala: '₹280/kg',
+                min_order_masala: '2kg',
+                confirm_order_message_prefix: 'Do you want to proceed with ordering ',
+                confirm_order_message_suffix: 'from',
+                confirm_order_message_for: 'for',
+                alert_order_placed_prefix: 'Order placed for ',
+                alert_order_placed_suffix: '! You can view your order in your profile\'s "My Orders" section.',
+                supplier_prefix: 'Supplier: ' // For the CSS content property
+            },
+            hi: {
+                page_title: 'वेंडरकनेक्ट - स्ट्रीट फूड आपूर्ति',
+                view_orders_btn: 'मेरे ऑर्डर देखें',
+                supplies_title: 'आपूर्ति',
+                item_burger_patties_name: 'ताजा बर्गर पैटीज़',
+                supplier_veggie_mart: 'फ्रेश वेजी मार्ट',
+                unit_label: 'इकाई:',
+                unit_kg: 'प्रति किलो',
+                price_label: 'कीमत:',
+                price_burger_patties: '₹450/किग्रा',
+                min_order_label: 'न्यूनतम ऑर्डर:',
+                min_order_burger_patties: '5किग्रा',
+                availability_label: 'उपलब्धता:',
+                status_available: 'उपलब्ध',
+                buy_now_btn: '🛒 अभी खरीदें',
+                item_cooking_oil_name: 'खाना पकाने का तेल (रिफाइंड)',
+                supplier_grain_master: 'ग्रेन मास्टर कं.',
+                unit_liter: 'प्रति लीटर',
+                price_cooking_oil: '₹120/लीटर',
+                min_order_cooking_oil: '20लीटर',
+                status_out_of_stock: 'स्टॉक में नहीं',
+                out_of_stock_btn: '❌ स्टॉक में नहीं',
+                item_masala_name: 'मसाला स्पाइस मिक्स',
+                supplier_spice_kingdom: 'स्पाइस किंगडम',
+                price_masala: '₹280/किग्रा',
+                min_order_masala: '2किग्रा',
+                confirm_order_message_prefix: 'क्या आप ऑर्डर करना चाहते हैं ',
+                confirm_order_message_suffix: 'से',
+                confirm_order_message_for: 'के लिए',
+                alert_order_placed_prefix: 'के लिए ऑर्डर दिया गया ',
+                alert_order_placed_suffix: '! आप अपना ऑर्डर अपनी प्रोफ़ाइल के "मेरे ऑर्डर" अनुभाग में देख सकते हैं।',
+                supplier_prefix: 'आपूर्तिकर्ता: ' // For the CSS content property
+            }
+        };
+
+        let currentLanguage = 'en'; // Default language
+
+        function setLanguage(lang) {
+            currentLanguage = lang;
+            applyTranslations();
+        }
+
+        function applyTranslations() {
+            document.querySelectorAll('[data-translate]').forEach(element => {
+                const key = element.getAttribute('data-translate');
+                if (translations[currentLanguage] && translations[currentLanguage][key]) {
+                    element.innerHTML = translations[currentLanguage][key];
+                }
+            });
+
+            // Update document title separately
+            document.title = translations[currentLanguage]['page_title'];
+
+            // Update the CSS :before content for supplier-name
+            const styleSheet = document.styleSheets[0]; // Assuming it's the first stylesheet
+            for (let i = 0; i < styleSheet.cssRules.length; i++) {
+                const rule = styleSheet.cssRules[i];
+                if (rule.selectorText === '.supplier-name::before') {
+                    rule.style.content = `'${translations[currentLanguage]['supplier_prefix']}'`;
+                    break;
+                }
+            }
+        }
+
+
+        function generateOrderId() {
+            const date = new Date();
+            const year = date.getFullYear().toString().slice(-2);
+            const month = (date.getMonth() + 1).toString().padStart(2, '0');
+            const day = date.getDate().toString().padStart(2, '0');
+            const hours = date.getHours().toString().padStart(2, '0');
+            const minutes = date.getMinutes().toString().padStart(2, '0');
+            const seconds = date.getSeconds().toString().padStart(2, '0');
+            const random = Math.floor(Math.random() * 900) + 100; // 3-digit random number
+            return `ORD-${year}${month}${day}-${hours}${minutes}${seconds}-${random}`;
+        }
+
+        document.querySelectorAll('.buy-now-btn').forEach(button => {
+            if (!button.disabled) {
+                button.addEventListener('click', function() {
+                    const itemName = this.dataset.itemName;
+                    const supplierName = this.dataset.supplierName;
+                    const itemPrice = parseFloat(this.dataset.itemPrice);
+                    const itemUnit = this.dataset.itemUnit;
+                    const minOrder = parseInt(this.dataset.minOrder);
+
+                    const confirmMessage = `${translations[currentLanguage]['confirm_order_message_prefix']}${itemName} (Min. ${minOrder}${itemUnit}) ${translations[currentLanguage]['confirm_order_message_suffix']} ${supplierName} ${translations[currentLanguage]['confirm_order_message_for']} ₹${itemPrice.toFixed(2)}/${itemUnit}?`;
+                    const confirmed = confirm(confirmMessage);
+
+                    if (confirmed) {
+                        const orderId = generateOrderId();
+                        const orderDate = new Date().toISOString().slice(0, 10); // YYYY-MM-DD
+                        const totalAmount = itemPrice * minOrder; // Simplified: Assuming minimum order quantity for total
+
+                        const newOrder = {
+                            id: orderId,
+                            date: orderDate,
+                            total: totalAmount,
+                            status: 'Pending', // New orders are pending
+                            items: [`${itemName} (${minOrder}${itemUnit}) from ${supplierName}`]
+                        };
+
+                        // Retrieve existing orders from sessionStorage
+                        const existingOrders = JSON.parse(sessionStorage.getItem('customerOrders')) || [];
+                        existingOrders.push(newOrder);
+                        sessionStorage.setItem('customerOrders', JSON.stringify(existingOrders));
+
+                        alert(`${translations[currentLanguage]['alert_order_placed_prefix']}${itemName}${translations[currentLanguage]['alert_order_placed_suffix']}`);
+                    }
+                });
+            }
+        });
+
+        // Add some visual feedback when hovering over cards
+        document.querySelectorAll('.item-card').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-12px) scale(1.02)';
+            });
+
+            card.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0) scale(1)';
+            });
+        });
+
+        document.addEventListener('DOMContentLoaded', applyTranslations); // Apply translations on load
+    </script>
+</body>
+</html>
